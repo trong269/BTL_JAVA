@@ -1,4 +1,4 @@
-package guis;
+package bankapp.guis;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;

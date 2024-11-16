@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import objs.User;
+import bankapp.guis.NewJDialog;
 /**
  *
  * @author nhang
@@ -50,7 +51,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        a1 = new guis.Gradient();
+        Gradient a1 = new bankapp.guis.Gradient();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -253,7 +254,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        //Show
+        // Hiển thị NewJDialog với thông tin người dùng
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,7 +317,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private guis.Gradient a1;
+    private bankapp.guis.Gradient a1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton6;
@@ -346,6 +347,10 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         {
             this.dispose();
             new LoginGui().setVisible(true);
+        }
+        else if(buttonPressed.equals("Số dư hiện tại")){
+            NewJDialog dialog = new NewJDialog(this, true, user);
+            dialog.setVisible(true);
         }
         else
         {
