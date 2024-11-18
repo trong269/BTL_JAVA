@@ -258,7 +258,8 @@ public class BankingAppDialog extends JDialog implements ActionListener
             //set the amount negative to show sign of withdraw
             transaction =new Transaction(user.getId(),trans_type,new BigDecimal(-amount),null);
         }
-        if(MyJDBC.addTransaction(transaction)&&MyJDBC.updateBalance(user))
+         if(MyJDBC.addTransaction(transaction)&&MyJDBC.updateBalance(user))
+        //if(MyJDBC.updateBalance(user))
         {
             JOptionPane.showMessageDialog(this, trans_type+" Successfully");
             resetFieldandUpdate();

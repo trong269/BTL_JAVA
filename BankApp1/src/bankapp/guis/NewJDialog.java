@@ -23,7 +23,7 @@ public class NewJDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.user = user;
         initComponents();
-        jLabel3.setText("Balance: $" + user.getCurrentBalance());
+        jLabel3.setText(  user.getCurrentBalance()+" VND");
     }
 
     /**

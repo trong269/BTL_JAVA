@@ -89,7 +89,7 @@ public class MyJDBC {
         ArrayList<Transaction> pastList = new ArrayList<>();
         try {
             Connection cnt = DriverManager.getConnection(DB_URL, DB_Username, DB_Password);
-            PreparedStatement ppst = cnt.prepareStatement("SELECT * FROM transaction WHERE user_id=?");
+            PreparedStatement ppst = cnt.prepareStatement("SELECT * FROM transactions WHERE user_id=?");
             ppst.setInt(1, user.getId());
             ResultSet rs = ppst.executeQuery();
             while (rs.next()) {
@@ -105,7 +105,7 @@ public class MyJDBC {
     public static boolean addTransaction(Transaction transaction) {
         try {
             Connection cnt = DriverManager.getConnection(DB_URL, DB_Username, DB_Password);
-            PreparedStatement ppst = cnt.prepareStatement("INSERT INTO transaction(user_id, trans_type, trans_amount, trans_date) VALUES(?,?,?,NOW())");
+            PreparedStatement ppst = cnt.prepareStatement("INSERT INTO transactions(user_id, trans_type, trans_amount, trans_date) VALUES(?,?,?,GETDATE())");
             ppst.setInt(1, transaction.getUserId());
             ppst.setString(2, transaction.getTrans_type());
             ppst.setBigDecimal(3, transaction.getTrans_amount());
@@ -114,7 +114,7 @@ public class MyJDBC {
             return true;
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
 
         return false;
@@ -129,9 +129,7 @@ public class MyJDBC {
             ppst.executeUpdate();
 
             return true;
-        } catch (SQLException e) {
-
-        }
+        } catch (SQLException e) {}
 
         return false;
     }
