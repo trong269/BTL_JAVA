@@ -5,6 +5,9 @@
 package bankapp.guis;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import objs.User;
 
@@ -23,7 +26,10 @@ public class NewJDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.user = user;
         initComponents();
-        jLabel3.setText(  user.getCurrentBalance()+" VND");
+        BigInteger balance= user.getCurrentBalance().toBigInteger();
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+        String formattedBalance = numberFormat.format(balance);
+        jLabel3.setText(  formattedBalance+" VND");
     }
 
     /**

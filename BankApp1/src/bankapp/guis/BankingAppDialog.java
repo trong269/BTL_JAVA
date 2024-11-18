@@ -60,7 +60,7 @@ public class BankingAppDialog extends JDialog implements ActionListener
         //Xu ly cac button ngoai tru "Dang Xuat"
         if(trans_type.equals("Số dư hiện tại"))
         {
-            this.addBalanceInfo();
+            //this.addBalanceInfo();
         }
         else
         {
@@ -84,7 +84,7 @@ public class BankingAppDialog extends JDialog implements ActionListener
                     this.addPastTransactionComponents();
                 }
             }
-            this.addActionButton(trans_type);
+            //this.addActionButton(trans_type);
         }
     }
     public void addOtpField() {
@@ -139,33 +139,6 @@ public class BankingAppDialog extends JDialog implements ActionListener
         ActionButton.addActionListener(this);
         add(ActionButton);
     }
-    public void addBalanceInfo() {
-    // Tạo JPanel để hiển thị thông tin số dư
-    JPanel balanceInfoPanel = new JPanel();
-    balanceInfoPanel.setLayout(new BorderLayout());
-    balanceInfoPanel.setBackground(new Color(230, 240, 250)); // Màu nền nhạt xanh
-    balanceInfoPanel.setBounds(10, 250, getWidth() - 30, 100); // Điều chỉnh kích thước của panel
-    balanceInfoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2, true)); // Đường viền xám nhạt
-
-    // Tạo label tiêu đề "Thông tin số dư hiện tại" với màu xanh đậm
-    JLabel balanceTitleLabel = new JLabel("Thông tin số dư hiện tại:");
-    balanceTitleLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-    balanceTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    balanceTitleLabel.setForeground(new Color(0, 51, 102)); // Màu xanh đậm
-
-    // Tạo label hiển thị số dư với phông chữ đậm hơn và màu xanh lam
-    JLabel currentBalanceLabel = new JLabel("Balance: $" + user.getCurrentBalance());
-    currentBalanceLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-    currentBalanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    currentBalanceLabel.setForeground(new Color(0, 102, 204)); // Màu xanh lam
-
-    // Thêm các label vào panel
-    balanceInfoPanel.add(balanceTitleLabel, BorderLayout.NORTH);
-    balanceInfoPanel.add(currentBalanceLabel, BorderLayout.CENTER);
-
-    // Thêm balanceInfoPanel vào dialog
-    this.add(balanceInfoPanel);
-}
 
     public void addUserField()
     {
@@ -202,7 +175,7 @@ public class BankingAppDialog extends JDialog implements ActionListener
         pastTransactionList = MyJDBC.getPastTransaction(user);
 
         // iterate through the list and add to the gui
-        for(int i = 0; i < pastTransactionList.size(); i++){
+        for(int i = 0; i <pastTransactionList.size() ; i++){
             // store current transaction
             Transaction pastTransaction = pastTransactionList.get(i);
 

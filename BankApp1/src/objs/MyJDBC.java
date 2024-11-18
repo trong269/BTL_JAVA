@@ -89,7 +89,7 @@ public class MyJDBC {
         ArrayList<Transaction> pastList = new ArrayList<>();
         try {
             Connection cnt = DriverManager.getConnection(DB_URL, DB_Username, DB_Password);
-            PreparedStatement ppst = cnt.prepareStatement("SELECT * FROM transactions WHERE user_id=?");
+            PreparedStatement ppst = cnt.prepareStatement("SELECT * FROM transactions WHERE user_id=? ORDER BY trans_date DESC");
             ppst.setInt(1, user.getId());
             ResultSet rs = ppst.executeQuery();
             while (rs.next()) {
