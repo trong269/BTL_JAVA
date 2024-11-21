@@ -10,22 +10,24 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import objs.User;
+import objs.MyJDBC;
 
 /**
  *
  * @author nhang
  */
-public class NewJDialog extends javax.swing.JDialog {
+public class CurrentBalanceDialog extends javax.swing.JDialog {
 
     private User user;
 
     /**
      * Creates new form NewJDialog
      */
-    public NewJDialog(java.awt.Frame parent, boolean modal, User user) {
+    public CurrentBalanceDialog(java.awt.Frame parent, boolean modal, User user) {
         super(parent, modal);
         this.user = user;
         initComponents();
+        MyJDBC.getBalance(user);
         BigInteger balance= user.getCurrentBalance().toBigInteger();
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
         String formattedBalance = numberFormat.format(balance);
@@ -136,13 +138,13 @@ public class NewJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrentBalanceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrentBalanceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrentBalanceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrentBalanceDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -40,7 +40,7 @@ public class RegisterGui extends BaseFrame {
         add(logoPTITLabel);
 
         //create username label and field
-        JLabel usernameLabel = new JLabel("Username:");
+        JLabel usernameLabel = new JLabel("Tên đăng nhập:");
         usernameLabel.setBounds(20, 190, 150, 20);
         usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
         usernameLabel.setForeground(Color.RED);
@@ -52,7 +52,7 @@ public class RegisterGui extends BaseFrame {
         add(usernameField);
 
         //create phoneNumber label and field
-        JLabel phoneNumberLabel = new JLabel("Phone number:");
+        JLabel phoneNumberLabel = new JLabel("Số điện thoại:");
         phoneNumberLabel.setBounds(20, 240, 150, 20);
         phoneNumberLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
         phoneNumberLabel.setForeground(Color.RED);
@@ -76,7 +76,7 @@ public class RegisterGui extends BaseFrame {
         add(CCCD_CMNDField);
 
         //create password label and field
-        JLabel passwordLabel = new JLabel("Password:");
+        JLabel passwordLabel = new JLabel("Mật khẩu:");
         passwordLabel.setBounds(20, 340, 150, 20);
         passwordLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
         passwordLabel.setForeground(Color.RED);
@@ -88,7 +88,7 @@ public class RegisterGui extends BaseFrame {
         add(passwordField);
 
         //create rePassword label and field
-        JLabel rePasswordLabel = new JLabel("Re-type Password:");
+        JLabel rePasswordLabel = new JLabel("Nhập lại mật khẩu:");
         rePasswordLabel.setBounds(20, 390, 150, 20);
         rePasswordLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
         rePasswordLabel.setForeground(Color.RED);
@@ -100,7 +100,7 @@ public class RegisterGui extends BaseFrame {
         add(rePasswordField);
 
         //create OTP label and field (NEW)
-        JLabel otpLabel = new JLabel("OTP (6 digits):");
+        JLabel otpLabel = new JLabel("Mã OTP (6 ký tự):");
         otpLabel.setBounds(20, 440, 150, 20);
         otpLabel.setFont(new Font("Dialog", Font.PLAIN, 15));
         otpLabel.setForeground(Color.RED);
@@ -112,7 +112,7 @@ public class RegisterGui extends BaseFrame {
         add(otpField);
 
         //create Register button
-        JButton registerButton = new JButton("Register");
+        JButton registerButton = new JButton("Đăng Ký");
         registerButton.setBounds(20, 480, super.getWidth() - 50, 40);
         registerButton.setFont(new Font("Dialog", Font.BOLD, 20));
         registerButton.setForeground(Color.WHITE);
@@ -134,13 +134,13 @@ public class RegisterGui extends BaseFrame {
                         if(!MyJDBC.checkUser(username, CCCD, phoneNumber))
                         {
                            MyJDBC.register(username, password, CCCD, OTP, phoneNumber,STK);
-                           JOptionPane.showMessageDialog(RegisterGui.this, "Register succesfully !");
+                           JOptionPane.showMessageDialog(RegisterGui.this, "Đăng ký thành công!");
                            RegisterGui.this.dispose();
                            new LoginGui().setVisible(true);
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(RegisterGui.this, "Account existed !");
+                            JOptionPane.showMessageDialog(RegisterGui.this, "Tài khoản đã tồn tại !");
                         }
                     } catch (SQLException ex) {
                         
@@ -152,7 +152,7 @@ public class RegisterGui extends BaseFrame {
         add(registerButton);
 
         //create Login label
-        JLabel loginLabel = new JLabel("<html><a href=\"#\">Have an account? Sign-in here</a><html>");
+        JLabel loginLabel = new JLabel("<html><a href=\"#\">Bạn đã có tài khoản? Đăng nhập ở đây </a><html>");
         loginLabel.setBounds(15, 520, super.getWidth() - 50, 40);
         loginLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,43 +171,43 @@ public class RegisterGui extends BaseFrame {
     // Kiểm tra các trường không được bỏ trống
     if (username.length() == 0 || password.length() == 0 || repassword.length() == 0 ||
         CCCD.length() == 0 || OTP.length() == 0 || phoneNumber.length() == 0) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "Fields cannot be empty!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Hãy điền đầy đủ thông tin!");
         return false;
     }
 
     // Kiểm tra độ dài tên người dùng (ít nhất 6 ký tự)
     if (username.length() < 6) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "Username must be at least 6 characters long!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Tên đăng nhập phải dài ít nhất 6 ký tự!");
         return false;
     }
 
     // Kiểm tra độ dài mật khẩu (ít nhất 8 ký tự)
     if (password.length() < 8) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "Password must be at least 8 characters long!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Mật khẩu phải dài ít nhất 8 ký tự!");
         return false;
     }
 
     // Kiểm tra mật khẩu và xác nhận mật khẩu phải trùng khớp
     if (!password.equals(repassword)) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "Passwords do not match!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Mật khẩu không khớp!");
         return false;
     }
 
     // Kiểm tra CCCD có đúng định dạng (độ dài phải là 12 số)
     if (CCCD.length() != 12 || !CCCD.matches("\\d+")) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "CCCD must be exactly 12 digits!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "CCCD phải có độ dài 12 chữ số!");
         return false;
     }
 
     // Kiểm tra OTP có đúng định dạng (OTP gồm 6 chữ số)
     if (OTP.length() != 6 || !OTP.matches("\\d+")) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "OTP must be exactly 6 digits!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Mã OTP phải dài ít nhất 6 ký tự!");
         return false;
     }
 
     // Kiểm tra số điện thoại có đúng định dạng (bắt đầu bằng 0 và độ dài từ 10-11 số)
     if (!phoneNumber.matches("0\\d{9,10}")) {
-        JOptionPane.showMessageDialog(RegisterGui.this, "Phone number must start with 0 and be 10 or 11 digits long!");
+        JOptionPane.showMessageDialog(RegisterGui.this, "Số điện thoại không đúng định dạng!");
         return false;
     }
 

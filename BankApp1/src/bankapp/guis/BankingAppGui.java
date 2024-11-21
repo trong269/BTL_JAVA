@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import objs.User;
-import bankapp.guis.NewJDialog;
+import bankapp.guis.CurrentBalanceDialog;
 /**
  *
  * @author nhang
@@ -349,7 +349,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
             new LoginGui().setVisible(true);
         }
         else if(buttonPressed.equals("Số dư hiện tại")){
-            NewJDialog dialog = new NewJDialog(this, true, user);
+            CurrentBalanceDialog dialog = new CurrentBalanceDialog(this, true, user);
             dialog.setVisible(true);
         }
         else

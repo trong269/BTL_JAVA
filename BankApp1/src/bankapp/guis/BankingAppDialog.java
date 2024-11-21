@@ -10,7 +10,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -107,16 +111,16 @@ public class BankingAppDialog extends JDialog implements ActionListener
     this.setLayout(null);
 }
     public void addCurrentBalanceandAmount()
-    {
+    {   
         // balance label
-        balanceLabel = new JLabel("Balance: $" + user.getCurrentBalance());
+        balanceLabel = new JLabel("Số dư: " + BalanceFormat()+" VND");
         balanceLabel.setBounds(0, 10, getWidth() - 20, 20);
         balanceLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(balanceLabel);
         
          // enter amount label
-        enterAmountLabel = new JLabel("Enter Amount:");
+        enterAmountLabel = new JLabel("Nhập số tiền:");
         enterAmountLabel.setBounds(0, 50, getWidth() - 20, 20);
         enterAmountLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         enterAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,7 +147,7 @@ public class BankingAppDialog extends JDialog implements ActionListener
     public void addUserField()
     {
         //Enter User Label
-        enterUserLabel = new JLabel("Enter User:");
+        enterUserLabel = new JLabel("Số tài khoản người nhận:");
         enterUserLabel.setBounds(0, 160, getWidth() - 20, 20);
         enterUserLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         enterUserLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -234,12 +238,12 @@ public class BankingAppDialog extends JDialog implements ActionListener
          if(MyJDBC.addTransaction(transaction)&&MyJDBC.updateBalance(user))
         //if(MyJDBC.updateBalance(user))
         {
-            JOptionPane.showMessageDialog(this, trans_type+" Successfully");
+            JOptionPane.showMessageDialog(this, trans_type+" thành công");
             resetFieldandUpdate();
         }
         else
         {
-            JOptionPane.showMessageDialog(this, trans_type+" Failed");
+            JOptionPane.showMessageDialog(this, trans_type+" thất bại");
         }
     }
     public void resetFieldandUpdate()
@@ -259,15 +263,23 @@ public class BankingAppDialog extends JDialog implements ActionListener
     {
         if(MyJDBC.transfer(user, transferUser, amount))
         {
-            JOptionPane.showMessageDialog(this, "Transfers Successfully");
+            JOptionPane.showMessageDialog(this, "Giao dịch thành công");
             resetFieldandUpdate();
         }
         else
         {
-             JOptionPane.showMessageDialog(this, "Transfers Failed");
+             JOptionPane.showMessageDialog(this, "Giao dịch thất bại");
         }
         
     }
+    // Định dạng số tiền
+    public String BalanceFormat(){
+        BigInteger balance= user.getCurrentBalance().toBigInteger();
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.GERMANY);
+        String formattedBalance = numberFormat.format(balance);
+        return formattedBalance;
+    }
+
     @Override public void actionPerformed(ActionEvent e)
     {
 //        System.out.println("Nhay vao day");

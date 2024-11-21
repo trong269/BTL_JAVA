@@ -160,11 +160,11 @@ public class LoginGui extends BaseFrame{
                     bankingAppGui.setVisible(true);
 
                     // show success dialog
-                    JOptionPane.showMessageDialog(bankingAppGui, "Login Successfully!");
+                    JOptionPane.showMessageDialog(bankingAppGui, "Đăng nhập thành công!");
                 }else{
                     // invalid login
                     
-                    JOptionPane.showMessageDialog(LoginGui.this, "Login failed...");
+                    JOptionPane.showMessageDialog(LoginGui.this, "Đăng nhập thất bại...");
                 }
             }
                 catch (SQLException ex) {

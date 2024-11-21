@@ -120,6 +120,22 @@ public class MyJDBC {
         return false;
     }
 
+    public static boolean getBalance(User user){
+        try{
+            Connection cnt=DriverManager.getConnection(DB_URL, DB_Username, DB_Password);
+            PreparedStatement ppst=cnt.prepareStatement("SELECT balance FROM users WHERE id=?");
+            ppst.setInt(1, user.getId());
+            ResultSet rs = ppst.executeQuery();
+            if(rs.next()){
+                user.setcurrentBalance(rs.getBigDecimal("balance"));
+                return true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean updateBalance(User user) {
         try {
             Connection cnt = DriverManager.getConnection(DB_URL, DB_Username, DB_Password);
