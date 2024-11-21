@@ -333,6 +333,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel backgroundLabel;
     private javax.swing.JTextField jTextField1;
     private BankingAppDialog dialog;
     private User user;
@@ -356,6 +357,10 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         {
             BankingAppDialog myDialog=new BankingAppDialog(this,user);
             myDialog.addComponent(buttonPressed);
+            backgroundLabel = new javax.swing.JLabel();
+            backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bankapp/guis/icon/icon14.png")));
+            backgroundLabel.setBounds(0, 0, 500 ,600);
+            myDialog.add(backgroundLabel);
             myDialog.setVisible(true);
         }
     }

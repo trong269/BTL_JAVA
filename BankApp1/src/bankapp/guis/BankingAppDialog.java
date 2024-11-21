@@ -7,6 +7,7 @@ package bankapp.guis;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -141,13 +142,16 @@ public class BankingAppDialog extends JDialog implements ActionListener
         ActionButton.setFont(new Font("Dialog", Font.BOLD, 20));
         ActionButton.setHorizontalAlignment(SwingConstants.CENTER);
         ActionButton.addActionListener(this);
+        //ActionButton.setContentAreaFilled(false);
+        ActionButton.setBackground(Color.decode("#bd193d"));
+        ActionButton.setForeground(Color.WHITE);
         add(ActionButton);
     }
 
     public void addUserField()
     {
         //Enter User Label
-        enterUserLabel = new JLabel("Số tài khoản người nhận:");
+        enterUserLabel = new JLabel("Tên tài khoản người nhận:");
         enterUserLabel.setBounds(0, 160, getWidth() - 20, 20);
         enterUserLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         enterUserLabel.setHorizontalAlignment(SwingConstants.CENTER);
