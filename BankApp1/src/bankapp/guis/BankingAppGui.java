@@ -18,6 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import objs.User;
 import bankapp.guis.CurrentBalanceDialog;
+import objs.MyJDBC;
+import java.util.*;
+import objs.Transaction;
 /**
  *
  * @author nhang
@@ -63,6 +66,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        chartButton = new javax.swing.JButton();
         dialog=new BankingAppDialog(this,user);
         jMenu1.setText("jMenu1");
 
@@ -157,6 +161,8 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         jButton6.setMargin(new java.awt.Insets(2, 1, 3, 40));
         jButton6.addActionListener(this);
 
+        
+
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("icon\\icon2.png"))); // NOI18N
         jButton7.setText("Rút tiền");
@@ -202,8 +208,24 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton10.addActionListener(this);
 
+        //chartButton.setBounds(15, 600, getWidth() - 50, 40); // Điều chỉnh vị trí và kích thước theo nhu cầu
+        chartButton.setText("Thống kê");
+        //add(chartButton);
+        //chartButton.addActionListener(this);
+        chartButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        //chartButton.setForeground(new java.awt.Color(255, 51, 0));
+        chartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("icon\\icon12.png"))); // NOI18N
+        chartButton.setToolTipText("");
+        chartButton.setContentAreaFilled(false);
+        chartButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        chartButton.setFocusPainted(false);
+        chartButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chartButton.setMargin(new java.awt.Insets(2, 14, 3, 50));
+        chartButton.addActionListener(this);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
+
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -214,9 +236,11 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)) // Thêm chartButton ở đây
                 .addGap(33, 33, 33))
         );
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -226,13 +250,15 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE) // Thêm chartButton ở đây
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,6 +361,7 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton chartButton;
     private BankingAppDialog dialog;
     private User user;
     private JTextField currentBalanceField;
@@ -344,7 +371,13 @@ public class BankingAppGui extends javax.swing.JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
-        if(buttonPressed.equals("Đăng xuất"))
+        if(buttonPressed.equals("Thống kê")){
+            ArrayList<Transaction> tmp= MyJDBC.getPastTransaction(user);
+            Collections.reverse(tmp);
+            SpendingChart chart = new SpendingChart(tmp);
+            chart.setVisible(true);
+        }
+        else if(buttonPressed.equals("Đăng xuất"))
         {
             this.dispose();
             new LoginGui().setVisible(true);
