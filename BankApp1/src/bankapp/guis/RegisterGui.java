@@ -31,12 +31,12 @@ public class RegisterGui extends BaseFrame {
         add(bankingAppLabel);
 
         //icon
-        ImageIcon logoPTITicon = new ImageIcon("D:\\Workspace\\PTIT.jpg");
+        ImageIcon logoPTITicon = new ImageIcon(getClass().getResource("icon//LogoImage.jpg"));
         Image logoPTITimage = logoPTITicon.getImage();
         Image resizePTITlogo = logoPTITimage.getScaledInstance(110, 100, Image.SCALE_SMOOTH);
         ImageIcon resizePTITlogoIcon = new ImageIcon(resizePTITlogo);
         JLabel logoPTITLabel = new JLabel(resizePTITlogoIcon);
-        logoPTITLabel.setBounds((super.getWidth() - 110) / 2, 70, 110, 100); // Căn giữa biểu tượng
+        logoPTITLabel.setBounds(190,80,100,100); // Căn giữa biểu tượng
         add(logoPTITLabel);
 
         //create username label and field

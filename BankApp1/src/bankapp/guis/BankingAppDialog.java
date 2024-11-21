@@ -207,7 +207,6 @@ public class BankingAppDialog extends JDialog implements ActionListener
             pastTransactionContainer.add(transactionTypeLabel, BorderLayout.WEST); // place this on the west side
             pastTransactionContainer.add(transactionAmountLabel, BorderLayout.EAST); // place this on the east side
             pastTransactionContainer.add(transactionDateLabel, BorderLayout.SOUTH); // place this on the south side
-
             // give a white background to each container
             pastTransactionContainer.setBackground(Color.WHITE);
 
@@ -260,8 +259,8 @@ public class BankingAppDialog extends JDialog implements ActionListener
         }
         
         //update balance
-        balanceLabel.setText("Balance: $" + user.getCurrentBalance());
-        bankingAppGui.getCurrentBalanceField().setText("Balance: $" + user.getCurrentBalance());
+        balanceLabel.setText("Số dư: " + BalanceFormat()+"VND");
+        bankingAppGui.getCurrentBalanceField().setText("Số dư: " + BalanceFormat()+"VND");
     }
     public void handleTransfer(User user,String transferUser,float amount)
     {

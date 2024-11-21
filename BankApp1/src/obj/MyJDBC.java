@@ -4,7 +4,7 @@
  */
 package obj;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+
 
 import java.math.BigDecimal;
 import java.sql.*;
