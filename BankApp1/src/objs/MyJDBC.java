@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class MyJDBC {
-    private static String DB_URL = "jdbc:sqlserver://nhanguyen.database.windows.net:1433;database=bankjava;user=nhanguyen@nhanguyen;password=Nha123456@;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    private static String DB_URL = "jdbc:sqlserver://nhanguyen.database.windows.net:1433;database=bankjava;user=nhanguye@nhanguyen;password=123456;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private static String DB_Username = "nhanguyen";
-    private static String DB_Password = "Nha123456@";
+    private static String DB_Password = "123456";
 
     public static void register(String username, String password, String CCCD, String OTP, String phoneNumber, String STK) throws SQLException {
         if (!checkUser(username, CCCD, phoneNumber)) {
